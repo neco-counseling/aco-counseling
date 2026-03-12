@@ -5,253 +5,785 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#faf7f2">
-<title>こころの相談室 — あなたの悩みに寄り添います</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Lora:wght@300;400;600&family=DM+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#ffffff">
+<title>The Mind Room — Thought Improvement Counseling</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Zen+Kaku+Gothic+New:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f5f0e8;
-    --warm-white: #faf7f2;
-    --sage: #8ba888;
-    --sage-dark: #5f7a5c;
-    --terracotta: #c47a5a;
-    --charcoal: #2d2d2d;
-    --muted: #4a4644;
-    --light-sage: #d4e0d2;
-    --parchment: #e8dfc8;
+    --white: #ffffff;
+    --off-white: #fafaf8;
+    --paper: #f5f3ef;
+    --gold: #c9a84c;
+    --gold-light: #e8cc80;
+    --gold-dark: #9a7835;
+    --gold-pale: #f7efd8;
+    --charcoal: #1a1a1a;
+    --mid: #5a5a5a;
+    --light: #a0a0a0;
+    --border: rgba(180,150,70,0.2);
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Noto Serif JP', serif; background: var(--warm-white); color: var(--charcoal); overflow-x: hidden; }
-  body.en { font-family: 'Lora', serif; }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(139,168,136,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 80% 90%, rgba(196,122,90,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 100% 100% at 50% 50%, rgba(212,224,210,0.1) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
-  .lang-toggle { display: flex; gap: 0.3rem; align-items: center; }
-  .lang-btn {
-    background: transparent; border: 1px solid rgba(139,168,136,0.4); border-radius: 2rem;
-    padding: 0.3rem 0.8rem; font-size: 0.75rem; cursor: pointer; letter-spacing: 0.05em;
-    color: var(--muted); transition: all 0.3s; font-family: 'Zen Kaku Gothic New', sans-serif;
-  }
-  .lang-btn.active { background: var(--sage-dark); color: white; border-color: var(--sage-dark); }
-  nav {
-    position: fixed; top: 0; width: 100%; padding: 1rem 1.4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(250,247,242,0.92); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(139,168,136,0.2); z-index: 100;
-  }
-  .nav-logo { font-family: 'Noto Serif JP', serif; font-weight: 600; font-size: 1rem; color: var(--sage-dark); letter-spacing: 0.1em; }
-  body.en .nav-logo { font-family: 'Lora', serif; }
-  .nav-logo-sub { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 300; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); margin-top: 0.1rem; }
-  body.en .nav-logo-sub { font-family: 'DM Sans', sans-serif; }
-  .hero {
-    position: relative; min-height: 100vh; display: grid; grid-template-columns: 1fr;
-    align-items: center; padding: 6rem 1.4rem 3rem; gap: 2rem; z-index: 1;
-  }
-  .hero-visual { display: none !important; }
-  .hero-text { animation: fadeInLeft 1s ease forwards; }
-  .hero-label {
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 300; font-size: 0.78rem;
-    letter-spacing: 0.25em; color: var(--terracotta); text-transform: uppercase;
-    margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem;
-  }
-  body.en .hero-label { font-family: 'DM Sans', sans-serif; }
-  .hero-label::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--terracotta); }
-  h1 { font-size: clamp(1.6rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.6; letter-spacing: 0.03em; color: var(--charcoal); margin-bottom: 1.5rem; word-break: keep-all; overflow-wrap: break-word; }
-  body.en h1 { font-family: 'Lora', serif; letter-spacing: 0; }
-  h1 span { color: var(--sage-dark); font-weight: 600; }
-  .hero-desc { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; font-size: 0.95rem; line-height: 2; color: #3a3634; margin-bottom: 2rem; }
-  body.en .hero-desc { font-family: 'DM Sans', sans-serif; font-size: 1rem; line-height: 1.8; }
-  section { position: relative; z-index: 1; padding: 3.5rem 1.4rem; }
-  .section-label { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.72rem; letter-spacing: 0.28em; color: var(--terracotta); text-transform: uppercase; display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
-  body.en .section-label { font-family: 'DM Sans', sans-serif; }
-  .section-label::before { content: ''; width: 1.2rem; height: 1px; background: var(--terracotta); }
-  h2 { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.5; letter-spacing: 0.03em; margin-bottom: 0.8rem; }
-  body.en h2 { font-family: 'Lora', serif; letter-spacing: 0; }
-  .section-sub { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; color: #4a4644; font-size: 0.9rem; line-height: 2; margin-bottom: 2.5rem; }
-  body.en .section-sub { font-family: 'DM Sans', sans-serif; line-height: 1.8; }
-  .worries-section { background: var(--warm-white); }
-  .btn-secondary {
-    background: transparent; color: var(--charcoal); padding: 0.85rem 2rem;
-    border: 1.5px solid var(--parchment); border-radius: 3rem;
-    font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.88rem;
-    letter-spacing: 0.06em; cursor: pointer; text-decoration: none;
-    display: inline-block; transition: all 0.3s;
-  }
-  body.en .btn-secondary { font-family: 'DM Sans', sans-serif; }
-  .btn-secondary:hover { border-color: var(--sage); color: var(--sage-dark); }
-  .counselors-section { background: var(--cream); }
-  .counselor-card { background: var(--warm-white); border-radius: 2rem; padding: 2.5rem 2rem; text-align: center; border: 1px solid rgba(139,168,136,0.15); transition: all 0.4s; }
-  .counselor-avatar { width: 90px; height: 90px; border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border: 3px solid var(--light-sage); background: rgba(139,168,136,0.3); }
-  .counselor-name { font-size: 1.15rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
-  .counselor-role { font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.8rem; color: var(--terracotta); letter-spacing: 0.1em; margin-bottom: 1rem; }
-  body.en .counselor-role { font-family: 'DM Sans', sans-serif; }
-  .counselor-bio { font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400; font-size: 0.85rem; color: #3a3634; line-height: 2; margin-bottom: 1.5rem; }
-  body.en .counselor-bio { font-family: 'DM Sans', sans-serif; line-height: 1.8; }
-  .counselor-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1rem; }
-  .tag { background: var(--light-sage); color: var(--sage-dark); padding: 0.3rem 0.9rem; border-radius: 2rem; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.75rem; letter-spacing: 0.05em; }
-  body.en .tag { font-family: 'DM Sans', sans-serif; letter-spacing: 0; }
-  .contact-section { background: var(--cream); text-align: center; }
-  footer { background: var(--cream); border-top: 1px solid rgba(139,168,136,0.2); padding: 2rem 1.4rem; text-align: center; }
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; overflow: hidden; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .ja-text { display: block; }
-  .en-text { display: none; }
-  body.en .ja-text { display: none; }
-  body.en .en-text { display: block; }
-  span.ja-text { display: inline; }
-  span.en-text { display: none; }
-  body.en span.ja-text { display: none; }
-  body.en span.en-text { display: inline; }
-  @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+body {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+background: var(–white);
+color: var(–charcoal);
+overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+position: fixed;
+top: 0;
+width: 100%;
+padding: 1.5rem 3rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(255,255,255,0.96);
+backdrop-filter: blur(20px);
+border-bottom: 1px solid var(–border);
+z-index: 100;
+transition: padding 0.4s;
+}
+
+.nav-logo {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: 1.3rem;
+color: var(–charcoal);
+letter-spacing: 0.12em;
+line-height: 1.2;
+}
+
+.nav-logo span {
+display: block;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.55rem;
+letter-spacing: 0.35em;
+color: var(–gold);
+text-transform: uppercase;
+margin-top: 0.2rem;
+}
+
+.nav-links {
+display: flex;
+gap: 2.5rem;
+list-style: none;
+align-items: center;
+}
+
+.nav-links a {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.78rem;
+color: var(–mid);
+text-decoration: none;
+letter-spacing: 0.15em;
+transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(–gold); }
+
+.nav-cta {
+border: 1px solid var(–gold) !important;
+color: var(–gold) !important;
+padding: 0.55rem 1.6rem !important;
+letter-spacing: 0.18em !important;
+transition: all 0.3s !important;
+}
+
+.nav-cta:hover {
+background: var(–gold) !important;
+color: white !important;
+}
+
+/* ── HERO ── */
+.hero {
+position: relative;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding: 10rem 3rem 6rem;
+background: var(–white);
+overflow: hidden;
+}
+
+.hero::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0; bottom: 0;
+background:
+radial-gradient(ellipse 70% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%),
+radial-gradient(ellipse 50% 40% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 60%);
+}
+
+.hero-inner {
+position: relative;
+z-index: 1;
+max-width: 700px;
+}
+
+.hero-ornament {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1.2rem;
+margin-bottom: 2.5rem;
+opacity: 0;
+animation: fadeUp 1s ease 0.2s forwards;
+}
+
+.hero-ornament::before,
+.hero-ornament::after {
+content: ‘’;
+width: 4rem;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–gold));
+}
+
+.hero-ornament::after {
+background: linear-gradient(90deg, var(–gold), transparent);
+}
+
+.hero-ornament-text {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.65rem;
+letter-spacing: 0.4em;
+color: var(–gold);
+text-transform: uppercase;
+}
+
+h1 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: clamp(1.8rem, 5vw, 5.5rem);
+line-height: 1.4;
+letter-spacing: 0.06em;
+color: var(–charcoal);
+margin-bottom: 2rem;
+opacity: 0;
+animation: fadeUp 1s ease 0.4s forwards;
+}
+
+@media (max-width: 640px) {
+h1 { font-size: 1.6rem !important; letter-spacing: 0.04em !important; }
+}
+
+h1 em {
+font-style: italic;
+color: var(–gold-dark);
+}
+
+.hero-desc {
+font-family: ‘Noto Serif JP’, serif;
+font-weight: 300;
+font-size: 0.95rem;
+line-height: 2.4;
+color: var(–mid);
+margin-bottom: 3.5rem;
+opacity: 0;
+animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.hero-cta {
+opacity: 0;
+animation: fadeUp 1s ease 0.8s forwards;
+}
+
+.btn-gold {
+display: inline-block;
+padding: 1.1rem 3rem;
+background: var(–charcoal);
+color: white;
+text-decoration: none;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 300;
+font-size: 0.82rem;
+letter-spacing: 0.25em;
+border: 1px solid var(–charcoal);
+transition: all 0.4s;
+position: relative;
+overflow: hidden;
+}
+
+.btn-gold::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: linear-gradient(135deg, var(–gold-dark), var(–gold), var(–gold-light));
+transform: translateX(-100%);
+transition: transform 0.4s ease;
+}
+
+.btn-gold:hover::before { transform: translateX(0); }
+.btn-gold span { position: relative; z-index: 1; }
+
+/* ── SECTIONS ── */
+section {
+padding: 6rem 3rem;
+position: relative;
+}
+
+.section-eyebrow {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.65rem;
+letter-spacing: 0.4em;
+color: var(–gold);
+text-transform: uppercase;
+text-align: center;
+margin-bottom: 1.2rem;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+content: ‘’;
+width: 2rem;
+height: 1px;
+background: var(–gold);
+opacity: 0.5;
+}
+
+h2 {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: clamp(2rem, 4vw, 3rem);
+line-height: 1.4;
+letter-spacing: 0.05em;
+text-align: center;
+color: var(–charcoal);
+margin-bottom: 1rem;
+}
+
+.section-sub {
+font-family: ‘Noto Serif JP’, serif;
+font-weight: 300;
+font-size: 0.88rem;
+color: var(–mid);
+line-height: 2.2;
+text-align: center;
+max-width: 480px;
+margin: 0 auto 4rem;
+}
+
+/* ── COURSES ── */
+.courses-section { background: var(–off-white); }
+
+.courses-wrap {
+display: flex;
+flex-direction: column;
+gap: 1.2rem;
+max-width: 520px;
+margin: 0 auto;
+}
+
+.course-card {
+border: 1px solid var(–border);
+background: var(–white);
+overflow: hidden;
+transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.course-card:hover {
+transform: translateY(-3px);
+box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+.course-header {
+padding: 1.8rem 2rem 1.4rem;
+border-bottom: 1px solid var(–border);
+}
+
+.course-label {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.62rem;
+letter-spacing: 0.35em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 0.8rem;
+}
+
+.course-price {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: 2.6rem;
+color: var(–charcoal);
+line-height: 1;
+}
+
+.course-price sub {
+font-size: 0.88rem;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+color: var(–light);
+vertical-align: baseline;
+margin-left: 0.4rem;
+}
+
+.course-tagline {
+font-family: ‘Noto Serif JP’, serif;
+font-weight: 300;
+font-size: 0.78rem;
+color: var(–mid);
+margin-top: 0.5rem;
+letter-spacing: 0.03em;
+}
+
+.course-body { padding: 1.6rem 2rem 2rem; }
+
+.course-features {
+list-style: none;
+margin-bottom: 1.8rem;
+}
+
+.course-features li {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 300;
+font-size: 0.83rem;
+color: var(–mid);
+padding: 0.55rem 0;
+border-bottom: 1px solid rgba(0,0,0,0.04);
+display: flex;
+align-items: center;
+gap: 0.8rem;
+letter-spacing: 0.03em;
+}
+
+.course-features li::before {
+content: ‘—’;
+color: var(–gold);
+font-size: 0.7rem;
+flex-shrink: 0;
+}
+
+.course-card.premium {
+background: var(–charcoal);
+border-color: rgba(201,168,76,0.4);
+box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+}
+
+.course-card.premium .course-header {
+border-bottom-color: rgba(201,168,76,0.2);
+background: linear-gradient(135deg, #1e1e1e, #151510);
+position: relative;
+overflow: hidden;
+}
+
+.course-card.premium .course-header::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–gold-light), transparent);
+}
+
+.course-card.premium .course-label { color: rgba(201,168,76,0.65); }
+.course-card.premium .course-price { color: var(–gold-light); }
+.course-card.premium .course-price sub { color: rgba(201,168,76,0.4); }
+.course-card.premium .course-tagline { color: rgba(255,255,255,0.4); }
+.course-card.premium .course-body { background: #111108; }
+.course-card.premium .course-features li { color: rgba(255,255,255,0.65); border-bottom-color: rgba(255,255,255,0.05); }
+.course-card.premium .course-features li::before { color: var(–gold); }
+
+.badge-limited {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+border: 1px solid rgba(201,168,76,0.4);
+padding: 0.2rem 0.8rem;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-size: 0.6rem;
+font-weight: 200;
+letter-spacing: 0.2em;
+color: rgba(201,168,76,0.8);
+text-transform: uppercase;
+margin-bottom: 1rem;
+}
+
+.badge-recommended {
+display: inline-flex;
+align-items: center;
+gap: 0.4rem;
+background: var(–gold-pale);
+border: 1px solid rgba(201,168,76,0.3);
+padding: 0.2rem 0.8rem;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-size: 0.6rem;
+font-weight: 300;
+letter-spacing: 0.2em;
+color: var(–gold-dark);
+text-transform: uppercase;
+margin-bottom: 1rem;
+}
+
+.btn-apply {
+display: block;
+width: 100%;
+padding: 1rem;
+text-align: center;
+text-decoration: none;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 300;
+font-size: 0.78rem;
+letter-spacing: 0.25em;
+transition: all 0.3s;
+}
+
+.btn-apply-light {
+border: 1px solid rgba(26,26,26,0.25);
+color: var(–charcoal);
+}
+
+.btn-apply-light:hover {
+background: var(–charcoal);
+color: white;
+}
+
+.btn-apply-mid {
+background: var(–charcoal);
+color: white;
+border: 1px solid var(–charcoal);
+}
+
+.btn-apply-mid:hover {
+background: var(–gold-dark);
+border-color: var(–gold-dark);
+}
+
+.btn-apply-gold {
+background: linear-gradient(135deg, var(–gold-dark) 0%, var(–gold) 40%, var(–gold-light) 60%, var(–gold) 80%, var(–gold-dark) 100%);
+color: #0a0800;
+font-weight: 400;
+letter-spacing: 0.2em;
+box-shadow: 0 4px 20px rgba(180,140,30,0.35);
+}
+
+.btn-apply-gold:hover {
+box-shadow: 0 8px 30px rgba(180,140,30,0.5);
+filter: brightness(1.05);
+}
+
+/* ── COUNSELOR ── */
+.counselor-section { background: var(–white); }
+
+.counselor-wrap {
+max-width: 560px;
+margin: 0 auto;
+border: 1px solid var(–border);
+padding: 3rem 2.5rem;
+text-align: center;
+position: relative;
+}
+
+.counselor-wrap::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 50%;
+transform: translateX(-50%);
+width: 40%;
+height: 1px;
+background: linear-gradient(90deg, transparent, var(–gold), transparent);
+}
+
+.counselor-avatar-wrap {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+border: 1px solid var(–border);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2.8rem;
+margin: 0 auto 1.5rem;
+background: var(–paper);
+position: relative;
+}
+
+.counselor-avatar-wrap::after {
+content: ‘’;
+position: absolute;
+inset: -5px;
+border-radius: 50%;
+border: 1px solid rgba(201,168,76,0.2);
+}
+
+.counselor-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: 1.8rem;
+letter-spacing: 0.15em;
+color: var(–charcoal);
+margin-bottom: 0.3rem;
+}
+
+.counselor-title {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.65rem;
+letter-spacing: 0.35em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 1.5rem;
+}
+
+.counselor-bio {
+font-family: ‘Noto Serif JP’, serif;
+font-weight: 300;
+font-size: 0.88rem;
+color: var(–mid);
+line-height: 2.3;
+margin-bottom: 2rem;
+}
+
+.counselor-schedule {
+display: inline-flex;
+align-items: center;
+gap: 0.8rem;
+border: 1px solid var(–border);
+padding: 0.7rem 1.5rem;
+margin-bottom: 1.8rem;
+}
+
+.counselor-schedule span {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 300;
+font-size: 0.75rem;
+color: var(–mid);
+letter-spacing: 0.1em;
+}
+
+.counselor-tags {
+display: flex;
+flex-wrap: wrap;
+gap: 0.6rem;
+justify-content: center;
+}
+
+.tag {
+border: 1px solid var(–border);
+padding: 0.3rem 1rem;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.7rem;
+letter-spacing: 0.12em;
+color: var(–mid);
+}
+
+/* ── CONTACT ── */
+.contact-section { background: var(–off-white); }
+
+.contact-wrap {
+max-width: 420px;
+margin: 0 auto;
+text-align: center;
+}
+
+.line-btn {
+display: block;
+padding: 1.2rem 2rem;
+background: #06C755;
+color: white;
+text-decoration: none;
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 400;
+font-size: 0.88rem;
+letter-spacing: 0.2em;
+transition: all 0.3s;
+box-shadow: 0 4px 20px rgba(6,199,85,0.25);
+margin-bottom: 1.2rem;
+}
+
+.line-btn:hover {
+background: #05b34c;
+box-shadow: 0 8px 30px rgba(6,199,85,0.35);
+transform: translateY(-2px);
+}
+
+.contact-note {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.72rem;
+color: var(–light);
+letter-spacing: 0.1em;
+}
+
+/* ── FOOTER ── */
+footer {
+background: var(–charcoal);
+padding: 2.5rem 3rem;
+text-align: center;
+border-top: 1px solid rgba(201,168,76,0.2);
+}
+
+.footer-logo {
+font-family: ‘Cormorant Garamond’, serif;
+font-weight: 300;
+font-size: 1.2rem;
+color: rgba(255,255,255,0.7);
+letter-spacing: 0.15em;
+margin-bottom: 0.3rem;
+}
+
+.footer-sub {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.58rem;
+letter-spacing: 0.4em;
+color: var(–gold);
+text-transform: uppercase;
+margin-bottom: 1.2rem;
+}
+
+.footer-copy {
+font-family: ‘Zen Kaku Gothic New’, sans-serif;
+font-weight: 200;
+font-size: 0.68rem;
+color: rgba(255,255,255,0.2);
+letter-spacing: 0.08em;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+nav { padding: 1.1rem 1.4rem; }
+.nav-links { display: none; }
+.hero { padding: 7rem 1.6rem 4rem; min-height: auto; }
+h1 { font-size: 2.8rem; }
+.hero-desc { font-size: 0.88rem; }
+section { padding: 4rem 1.4rem; }
+h2 { font-size: 2rem; }
+.counselor-wrap { padding: 2rem 1.4rem; }
+.course-header { padding: 1.4rem 1.4rem 1.2rem; }
+.course-body { padding: 1.2rem 1.4rem 1.6rem; }
+footer { padding: 2rem 1.4rem; }
+}
 </style>
+
 </head>
 <body>
 
+<!-- NAV -->
+
 <nav>
   <div class="nav-logo">
-    <span class="ja-text">こころの相談室</span>
-    <span class="en-text">Mind Counseling</span>
-    <div class="nav-logo-sub">
-      <span class="ja-text">思考の根本改善</span>
-      <span class="en-text">Transforming the way you think</span>
-    </div>
+    The Mind Room
+    <span>Thought Improvement Counseling</span>
   </div>
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('ja')">JP</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-  </div>
+  <ul class="nav-links">
+    <li><a href="#courses">コース</a></li>
+    <li><a href="#counselor">カウンセラー</a></li>
+    <li><a href="#contact" class="nav-cta">お申し込み</a></li>
+  </ul>
 </nav>
 
+<!-- HERO -->
+
 <section class="hero">
-  <div class="hero-text">
-    <div class="hero-label">
-      <span class="ja-text">安心・安全・秘密厳守</span>
-      <span class="en-text">Safe · Confidential · Caring</span>
+  <div class="hero-inner">
+    <div class="hero-ornament">
+      <span class="hero-ornament-text">For the Successful &amp; Lonely</span>
     </div>
-    <h1>
-      <span class="ja-text">あなたの悩みを<br><span>一人で</span>抱えないで</span>
-      <span class="en-text">You don't have to carry<br>your worries <span>alone</span></span>
-    </h1>
+    <h1>結果を出してきた。<br><em>それでも、満たされない。</em></h1>
     <p class="hero-desc">
-      <span class="ja-text">悩み。<br>それは思考の誤りにより発生しています。<br><br>考え方、捉え方を変えれば選択が広がり見えてきます。<br>不透明な未来の視点から今に向けて、自分の人生を自分で切り拓きましょう。<br><br>そのお手伝い、きっかけとなるのが私の役目です。</span>
-      <span class="en-text">Worry often comes from patterns of thinking — not reality.<br><br>When you shift the way you see and interpret the world, your choices expand.<br>Instead of dreading an uncertain future, you can start living with clarity, today.<br><br>My role is to walk alongside you, and help spark that change.</span>
+      仕事での成功と、心の充足は別物です。<br>
+      誰にも言えない本音、評価を気にせず話せる場所。<br>
+      その静かな一歩を、ここから始めませんか。
     </p>
+    <div class="hero-cta">
+      <a href="https://lin.ee/MCWLE3V" target="_blank" class="btn-gold"><span>お申し込みはこちら</span></a>
+    </div>
   </div>
 </section>
 
-<section id="worries" class="worries-section">
-  <div class="section-label">
-    <span class="ja-text">コース・料金</span>
-    <span class="en-text">Plans & Pricing</span>
-  </div>
-  <h2>
-    <span class="ja-text">2つのコースから<br>お選びください</span>
-    <span class="en-text">Choose the plan<br>that's right for you</span>
-  </h2>
-  <p class="section-sub">
-    <span class="ja-text">チャットで気軽に。あなたのペースで思考を変えていきます。</span>
-    <span class="en-text">Simple, friendly chat sessions — at your own pace.</span>
-  </p>
-  <div style="display:flex; flex-direction:column; gap:1.6rem; max-width:480px; margin:0 auto;">
-    <div class="reveal" style="background:var(--warm-white); border-radius:1.8rem; border:1.5px solid rgba(139,168,136,0.3); overflow:hidden; box-shadow:0 4px 20px rgba(95,122,92,0.07); position:relative;">
-      <div style="position:absolute; top:1.2rem; right:1.3rem; background:var(--terracotta); color:white; font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.68rem; font-weight:700; padding:0.25rem 0.85rem; border-radius:2rem;">
-        <span class="ja-text">毎月3名限定</span><span class="en-text">3 spots/month</span>
-      </div>
-      <div style="background:var(--cream); padding:1.6rem 1.8rem 1.2rem;">
-        <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.7rem; letter-spacing:0.18em; color:var(--terracotta); margin-bottom:0.5rem; text-transform:uppercase;">
-          <span class="ja-text">お試しコース</span><span class="en-text">Intro Session</span>
-        </div>
-        <div style="display:flex; align-items:flex-end; gap:0.4rem; margin-bottom:0.2rem;">
-          <span class="ja-text" style="font-size:2.2rem; font-weight:600; color:var(--charcoal); line-height:1;">¥1,980</span>
-          <span class="en-text" style="font-size:2.2rem; font-weight:600; color:var(--charcoal); line-height:1;">$13</span>
-          <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.76rem; color:var(--muted); padding-bottom:0.25rem;">
-            <span class="ja-text">税込</span><span class="en-text">USD</span>
-          </span>
-        </div>
-        <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.8rem; color:var(--muted);">
-          <span class="ja-text">まずは試してみたい方へ</span><span class="en-text">Perfect for a first step</span>
-        </div>
-      </div>
-      <div style="padding:1.4rem 1.8rem 1.8rem;">
-        <div style="display:flex; flex-direction:column; gap:0.8rem; margin-bottom:1.6rem;">
-          <div style="display:flex; align-items:center; gap:0.8rem;">
-            <span style="width:1.5rem; height:1.5rem; background:var(--light-sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">💬</span>
-            <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:var(--charcoal);">
-              <span class="ja-text">チャット <strong>10分間</strong></span><span class="en-text">Chat <strong>10 min</strong></span>
-            </span>
-          </div>
-          <div style="display:flex; align-items:center; gap:0.8rem;">
-            <span style="width:1.5rem; height:1.5rem; background:var(--light-sage); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">📅</span>
-            <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:var(--charcoal);">
-              <span class="ja-text">毎週日曜日対応</span><span class="en-text">Available every Sunday</span>
-            </span>
-          </div>
-          <div style="display:flex; align-items:center; gap:0.8rem;">
-            <span style="width:1.5rem; height:1.5rem; background:rgba(196,122,90,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">🌸</span>
-            <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:var(--terracotta); font-weight:600;">
-              <span class="ja-text">毎月3名限定</span><span class="en-text">Limited to 3/month</span>
-            </span>
-          </div>
-        </div>
-        <a href="https://lin.ee/MCWLE3V" target="_blank" class="btn-secondary" style="display:block; text-align:center; padding:0.85rem;">
-          <span class="ja-text">このコースで申し込む</span><span class="en-text">Apply for this plan</span>
-        </a>
-      </div>
-    </div>
+<!-- COURSES -->
+
+<section id="courses" class="courses-section">
+  <div class="section-eyebrow">Course &amp; Price</div>
+  <h2>コース・料金</h2>
+  <p class="section-sub">毎週日曜日 10:00〜15:00<br>時間内はいつでもチャットで話しかけてください<br><br>10:00〜15:00で会話をした後、あなたとの会話から思考パターンを解析致します。</p>
+
+  <div class="courses-wrap">
 
 ```
-<div class="reveal" style="background:linear-gradient(150deg,#4a5c48 0%,#5e7058 55%,#635848 100%); border-radius:1.8rem; border:1px solid rgba(220,200,155,0.2); overflow:hidden; box-shadow:0 8px 36px rgba(0,0,0,0.1); position:relative;">
-  <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(220,200,150,0.3),transparent);"></div>
-  <div style="position:absolute; top:1.3rem; right:1.3rem; background:rgba(210,190,140,0.15); border:1px solid rgba(210,190,140,0.28); color:rgba(230,215,175,0.85); font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.68rem; font-weight:600; padding:0.25rem 0.8rem; border-radius:2rem;">
-    <span class="ja-text">おすすめ</span><span class="en-text">Recommended</span>
+<!-- 単発 -->
+<div class="course-card reveal">
+  <div class="course-header">
+    <div class="course-label">Single Session — 単発コース</div>
+    <div class="course-price">¥10,000<sub>/ 1回 税込</sub></div>
+    <div class="course-tagline">まずは1回試してみたい方へ</div>
   </div>
-  <div style="padding:1.6rem 1.8rem 1.2rem;">
-    <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.7rem; letter-spacing:0.18em; color:rgba(220,200,155,0.7); margin-bottom:0.5rem; text-transform:uppercase;">
-      <span class="ja-text">思考根本改善コース</span><span class="en-text">Deep Mind Reset</span>
-    </div>
-    <div style="display:flex; align-items:flex-end; gap:0.4rem; margin-bottom:0.2rem;">
-      <span class="ja-text" style="font-size:2.2rem; font-weight:600; color:rgba(240,225,185,0.9); line-height:1;">¥8,000</span>
-      <span class="en-text" style="font-size:2.2rem; font-weight:600; color:rgba(240,225,185,0.9); line-height:1;">$53</span>
-      <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.76rem; color:rgba(220,200,155,0.5); padding-bottom:0.25rem;">
-        <span class="ja-text">1回 / 税込</span><span class="en-text">per session</span>
-      </span>
-    </div>
-    <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.8rem; color:rgba(210,195,155,0.6);">
-      <span class="ja-text">本格的に変わりたい方へ</span><span class="en-text">For those ready for real change</span>
-    </div>
+  <div class="course-body">
+    <ul class="course-features">
+      <li>日曜日 10:00〜15:00 チャット自由</li>
+      <li>1回限り</li>
+      <li>思考パターンへのアドバイス</li>
+    </ul>
+    <a href="https://lin.ee/MCWLE3V" target="_blank" class="btn-apply btn-apply-light">LINE でお申し込み</a>
   </div>
-  <div style="margin:0 1.8rem; height:1px; background:linear-gradient(90deg,transparent,rgba(210,190,140,0.15),transparent);"></div>
-  <div style="padding:1.4rem 1.8rem 1.8rem;">
-    <div style="display:flex; flex-direction:column; gap:0.8rem; margin-bottom:1.6rem;">
-      <div style="display:flex; align-items:center; gap:0.8rem;">
-        <span style="width:1.5rem; height:1.5rem; background:rgba(200,175,110,0.12); border:1px solid rgba(200,175,110,0.22); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">💬</span>
-        <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:rgba(235,220,185,0.85);">
-          <span class="ja-text">チャット <strong style="color:rgba(240,225,185,0.95);">30分間</strong></span>
-          <span class="en-text">Chat <strong style="color:rgba(240,225,185,0.95);">30 min</strong></span>
-        </span>
-      </div>
-      <div style="display:flex; align-items:center; gap:0.8rem;">
-        <span style="width:1.5rem; height:1.5rem; background:rgba(200,175,110,0.12); border:1px solid rgba(200,175,110,0.22); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">📅</span>
-        <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:rgba(235,220,185,0.85);">
-          <span class="ja-text">毎週日曜日対応</span><span class="en-text">Available every Sunday</span>
-        </span>
-      </div>
-      <div style="display:flex; align-items:center; gap:0.8rem;">
-        <span style="width:1.5rem; height:1.5rem; background:rgba(200,175,110,0.12); border:1px solid rgba(200,175,110,0.22); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7rem; flex-shrink:0;">🌱</span>
-        <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.86rem; color:rgba(235,220,185,0.85);">
-          <span class="ja-text">思考パターンの根本改善</span><span class="en-text">Root-level mindset shift</span>
-        </span>
-      </div>
-    </div>
-    <a href="https://lin.ee/MCWLE3V" target="_blank" style="display:block; text-align:center; padding:0.85rem; background:linear-gradient(135deg,rgba(170,138,60,0.85),rgba(200,170,100,0.85)); color:#1e1a0e; border-radius:3rem; font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.88rem; font-weight:700; letter-spacing:0.08em; text-decoration:none; box-shadow:0 3px 14px rgba(170,138,60,0.2);">
-      <span class="ja-text">このコースで申し込む</span><span class="en-text">Apply for this plan</span>
-    </a>
+</div>
+
+<!-- 月2回 -->
+<div class="course-card reveal" style="transition-delay:0.1s">
+  <div class="course-header" style="background:var(--paper);">
+    <div class="badge-recommended">✦ &nbsp;Recommended</div>
+    <div class="course-label">Bi-weekly — 月2回コース</div>
+    <div class="course-price">¥20,000<sub>/ 月額 税込</sub></div>
+    <div class="course-tagline">継続して変わりたい方へ ── ¥10,000 × 2回</div>
+  </div>
+  <div class="course-body">
+    <ul class="course-features">
+      <li>日曜日 10:00〜15:00 チャット自由 × 2回</li>
+      <li>隔週日曜日の対応</li>
+      <li>継続的な思考改善サポート</li>
+    </ul>
+    <a href="https://lin.ee/MCWLE3V" target="_blank" class="btn-apply btn-apply-mid">LINE でお申し込み</a>
+  </div>
+</div>
+
+<!-- 月4回 プレミアム -->
+<div class="course-card premium reveal" style="transition-delay:0.2s">
+  <div class="course-header">
+    <div class="badge-limited">✦ &nbsp;月2名限定</div>
+    <div class="course-label">Monthly Premium — 月4回コース</div>
+    <div class="course-price">¥40,000<sub>/ 月額 税込</sub></div>
+    <div class="course-tagline">本気で変わりたい方への専属プログラム ── ¥10,000 × 4回</div>
+  </div>
+  <div class="course-body">
+    <ul class="course-features">
+      <li>日曜日 10:00〜15:00 チャット自由 × 4回</li>
+      <li>毎週日曜日・1ヶ月パック</li>
+      <li>Aco専属・優先対応</li>
+      <li>思考パターンの根本改善プログラム</li>
+    </ul>
+    <a href="https://lin.ee/MCWLE3V" target="_blank" class="btn-apply btn-apply-gold">LINE でお申し込み</a>
   </div>
 </div>
 ```
@@ -259,108 +791,73 @@
   </div>
 </section>
 
-<section id="counselors" class="counselors-section">
-  <div class="section-label">
-    <span class="ja-text">カウンセラー紹介</span><span class="en-text">About Your Counselor</span>
-  </div>
-  <h2>
-    <span class="ja-text">担当カウンセラー</span><span class="en-text">Meet Aco</span>
-  </h2>
-  <p class="section-sub">
-    <span class="ja-text">思考改善を専門に、チャットで丁寧にサポートします。</span>
-    <span class="en-text">Specializing in mindset work — supportive, thoughtful, at your pace.</span>
-  </p>
-  <div style="display:flex; justify-content:center;">
-    <div class="counselor-card reveal" style="max-width:420px; width:100%;">
-      <div class="counselor-avatar" style="width:110px;height:110px;font-size:3rem;">🌿</div>
-      <div class="counselor-name">Aco</div>
-      <div class="counselor-role">
-        <span class="ja-text">思考改善カウンセラー</span><span class="en-text">Mindset Counselor</span>
-      </div>
-      <p class="counselor-bio">
-        <span class="ja-text">現在の職場でも思考教育を行っています。ネガティブな思考のクセに寄り添い、より生きやすい考え方を一緒に育てます。チャット形式で、あなたのペースに合わせて丁寧にサポートします。</span>
-        <span class="en-text">I also teach mindset principles in my current workplace. My approach gently meets negative thinking patterns where they are, and helps you grow a more freeing way of seeing the world — through chat, at your own pace.</span>
-      </p>
-      <div style="margin-top:1.2rem; padding:0.8rem 1.2rem; background:var(--light-sage); border-radius:0.8rem; display:inline-block;">
-        <span style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.82rem; color:var(--sage-dark);">
-          <span class="ja-text">📅 対応日：毎週日曜日のみ</span><span class="en-text">📅 Available: Sundays only</span>
-        </span>
-      </div>
-      <div class="counselor-tags">
-        <span class="tag"><span class="ja-text">思考改善</span><span class="en-text">Mindset</span></span>
-        <span class="tag"><span class="ja-text">認知の歪み</span><span class="en-text">Cognitive Patterns</span></span>
-        <span class="tag"><span class="ja-text">セルフケア</span><span class="en-text">Self-Care</span></span>
-        <span class="tag"><span class="ja-text">自己肯定感</span><span class="en-text">Self-Worth</span></span>
-      </div>
+<!-- COUNSELOR -->
+
+<section id="counselor" class="counselor-section">
+  <div class="section-eyebrow">Counselor</div>
+  <h2>担当カウンセラー</h2>
+  <p class="section-sub">思考改善を専門に、チャットで丁寧にサポートします。</p>
+
+  <div class="counselor-wrap reveal">
+    <div class="counselor-avatar-wrap">🌿</div>
+    <div class="counselor-name">Aco</div>
+    <div class="counselor-title">Thought Improvement Counselor</div>
+    <p class="counselor-bio">
+      現在の職場でも思考教育を行っています。<br>
+      ネガティブな思考のクセに寄り添い、より生きやすい考え方を一緒に育てます。<br>
+      チャット形式で、あなたのペースに合わせて丁寧にサポートします。
+    </p>
+    <div class="counselor-schedule">
+      <span>📅 &nbsp;対応日：毎週日曜日 10:00〜15:00</span>
+    </div>
+    <div class="counselor-tags">
+      <span class="tag">思考改善</span>
+      <span class="tag">認知の歪み</span>
+      <span class="tag">セルフケア</span>
+      <span class="tag">自己肯定感</span>
     </div>
   </div>
 </section>
+
+<!-- CONTACT -->
 
 <section id="contact" class="contact-section">
-  <div class="section-label" style="justify-content:center">
-    <span class="ja-text">お申し込み</span><span class="en-text">Book a Session</span>
-  </div>
-  <h2 style="margin-bottom:0.5rem">
-    <span class="ja-text">LINEで<br>お申し込みください</span>
-    <span class="en-text">Reach out<br>via LINE</span>
-  </h2>
-  <p class="section-sub" style="margin: 0 auto 2.5rem; text-align:center">
-    <span class="ja-text">下のボタンから友だち追加して、ご希望のコースをメッセージしてください。日程・お支払い方法をご案内します。</span>
-    <span class="en-text">Add me on LINE, then send your preferred plan name. I'll reply with scheduling and payment details.</span>
-  </p>
-  <div style="max-width:400px; margin:0 auto; text-align:center;">
-    <div style="background:var(--warm-white); border-radius:2rem; padding:2.5rem 2rem; border:1px solid rgba(139,168,136,0.2); box-shadow:0 8px 32px rgba(95,122,92,0.08);">
-      <div style="font-size:3rem; margin-bottom:1rem;">💬</div>
-      <p style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.88rem; color:var(--muted); line-height:2; margin-bottom:2rem;">
-        <span class="ja-text">友だち追加後、<br>ご希望のコース名をお送りください。<br>Acoより折り返しご連絡します。</span>
-        <span class="en-text">After adding me,<br>send your preferred plan name.<br>I'll reply as soon as I can.</span>
-      </p>
-      <a href="https://lin.ee/MCWLE3V" target="_blank" style="display:block; padding:1.1rem; background:#06C755; color:white; border-radius:3rem; font-family:'Zen Kaku Gothic New',sans-serif; font-size:1rem; font-weight:700; letter-spacing:0.08em; text-decoration:none; box-shadow:0 4px 20px rgba(6,199,85,0.3);">
-        <span class="ja-text">LINE で友だち追加する</span><span class="en-text">Add on LINE</span>
-      </a>
-      <p style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.75rem; color:var(--muted); margin-top:1.2rem;">
-        <span class="ja-text">🔒 秘密は厳守します</span><span class="en-text">🔒 Your privacy is fully protected</span>
-      </p>
-    </div>
+  <div class="section-eyebrow">Contact</div>
+  <h2>お申し込み</h2>
+  <p class="section-sub">下のボタンから友だち追加して、ご希望のコースをメッセージしてください。Acoより折り返しご連絡します。</p>
+
+  <div class="contact-wrap reveal">
+    <a href="https://lin.ee/MCWLE3V" target="_blank" class="line-btn">LINE で友だち追加する</a>
+    <p class="contact-note">🔒 &nbsp;秘密は厳守します</p>
   </div>
 </section>
 
+<!-- FOOTER -->
+
 <footer>
-  <div style="font-family:'Noto Serif JP',serif; font-size:0.95rem; font-weight:600; color:var(--sage-dark); letter-spacing:0.1em; margin-bottom:0.3rem;">
-    <span class="ja-text">こころの相談室</span><span class="en-text">Mind Counseling</span>
-  </div>
-  <div style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.72rem; color:var(--muted); letter-spacing:0.12em; margin-bottom:1.2rem;">
-    <span class="ja-text">思考の根本改善</span><span class="en-text">Transforming the way you think</span>
-  </div>
-  <p style="font-family:'Zen Kaku Gothic New',sans-serif; font-size:0.75rem; color:var(--muted);">© 2025 こころの相談室. All rights reserved.</p>
+  <div class="footer-logo">The Mind Room</div>
+  <div class="footer-sub">Thought Improvement Counseling</div>
+  <p class="footer-copy">© 2025 The Mind Room. All rights reserved.</p>
 </footer>
 
 <script>
-  function setLang(lang) {
-    const body = document.body;
-    const btns = document.querySelectorAll('.lang-btn');
-    if (lang === 'en') {
-      body.classList.add('en');
-      document.documentElement.lang = 'en';
-    } else {
-      body.classList.remove('en');
-      document.documentElement.lang = 'ja';
-    }
-    btns.forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
-    });
-  }
-
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), 100);
+        entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.padding = window.scrollY > 50
+      ? window.innerWidth > 640 ? '1rem 3rem' : '0.8rem 1.4rem'
+      : window.innerWidth > 640 ? '1.5rem 3rem' : '1.1rem 1.4rem';
+  });
 </script>
 
 </body>
