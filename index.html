@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html lang="ja">
@@ -100,11 +99,22 @@ transition: background 0.3s !important;
 position: relative;
 min-height: 100vh;
 display: grid;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr;
 align-items: center;
+padding: 6rem 1.4rem 3rem;
+gap: 2rem;
+z-index: 1;
+}
+
+.hero-visual { display: none !important; }
+
+@media (min-width: 768px) {
+.hero {
+grid-template-columns: 1fr 1fr;
 padding: 8rem 5rem 4rem;
 gap: 4rem;
-z-index: 1;
+}
+.hero-visual { display: block; }
 }
 
 .hero-text { animation: fadeInLeft 1s ease forwards; }
@@ -131,12 +141,14 @@ background: var(–terracotta);
 }
 
 h1 {
-font-size: clamp(2.4rem, 4vw, 3.8rem);
+font-size: clamp(1.6rem, 5vw, 3.8rem);
 font-weight: 300;
 line-height: 1.6;
 letter-spacing: 0.05em;
 color: var(–charcoal);
 margin-bottom: 2rem;
+word-break: keep-all;
+overflow-wrap: break-word;
 }
 
 h1 span {
