@@ -1,4 +1,4 @@
-、、、
+```html
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -1062,4 +1062,4 @@ h2 { font-size: 1.7rem; }
 
 </body>
 </html>
-、、、
+```
